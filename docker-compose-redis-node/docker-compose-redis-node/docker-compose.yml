@@ -1,0 +1,16 @@
+version: '3'
+services:
+  redis:
+    image: redis:latest
+    container_name: redis-server
+
+  web:
+    build: .
+    container_name: node-web
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
